@@ -1,0 +1,363 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+/* Global Styles */
+body {
+	margin: 0;
+	padding: 0;
+	background: linear-gradient(135deg, #ffe6d1 0%, #ff9a44 100%);
+	font-family: 'Kanit', sans-serif;
+	overflow: hidden;
+	height: 100vh;
+	width: 100vw;
+}
+
+.screen-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+	align-items: center; /* จัดให้อยู่กึ่งกลางแนวนอน */
+	min-height: 100vh; /* 👈 แก้ตรงนี้เป็น 100vh ครับ */
+	width: 100vw;
+	position: relative;
+}
+
+/* ==================== 0. Loading Screen ==================== */
+.loading-text {
+	color: #cc5c00;
+	margin-bottom: 50px;
+}
+
+.progress-container {
+	width: 80%;
+	max-width: 400px;
+	height: 10px;
+	background: rgba(255, 255, 255, 0.4);
+	border-radius: 10px;
+	position: relative;
+}
+
+.progress-bar {
+	height: 100%;
+	background: #ff7300;
+	border-radius: 10px;
+	transition: width 0.1s linear;
+}
+
+/* 3D Cat Cube CSS */
+.scene {
+	width: 40px;
+	height: 40px;
+	perspective: 600px;
+	position: absolute;
+	top: -50px;
+	transform: translateX(-50%);
+	transition: left 0.1s linear;
+}
+.cube {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	transform-style: preserve-3d;
+	animation: tumble 1s infinite linear;
+}
+.face {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	background: #ffdfc4;
+	border: 2px solid #ff7300;
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
+	box-shadow: inset 0 0 10px rgba(255, 115, 0, 0.2);
+}
+.front {
+	transform: rotateY(0deg) translateZ(20px);
+}
+.back {
+	transform: rotateY(180deg) translateZ(20px);
+}
+.right {
+	transform: rotateY(90deg) translateZ(20px);
+}
+.left {
+	transform: rotateY(-90deg) translateZ(20px);
+}
+.top {
+	transform: rotateX(90deg) translateZ(20px);
+}
+.bottom {
+	transform: rotateX(-90deg) translateZ(20px);
+}
+
+@keyframes tumble {
+	0% {
+		transform: rotateX(0deg) rotateZ(0deg) rotateY(0deg);
+	}
+	100% {
+		transform: rotateX(360deg) rotateZ(360deg) rotateY(0deg);
+	}
+}
+
+/* ==================== 1. Login & Transition ==================== */
+.card-glass {
+	background: rgba(255, 255, 255, 0.85);
+	backdrop-filter: blur(10px);
+	border-radius: 24px;
+	padding: 40px;
+	text-align: center;
+	box-shadow: 0 10px 30px rgba(220, 100, 0, 0.2);
+	max-width: 400px;
+	width: 90%;
+}
+
+.login-title {
+	color: #ff7300;
+	margin-top: 10px;
+}
+
+.avatar-bounce {
+	font-size: 4rem;
+	animation: bounce 2s infinite ease-in-out;
+}
+
+input {
+	padding: 12px 20px;
+	border-radius: 50px;
+	border: 2px solid #ffb26b;
+	font-size: 16px;
+	outline: none;
+	width: 80%;
+	margin: 15px 0;
+	font-family: inherit;
+	text-align: center;
+	transition: border-color 0.3s;
+}
+input:focus {
+	border-color: #ff7300;
+}
+
+.btn {
+	background: #ff7300;
+	color: white;
+	border: none;
+	padding: 12px 40px;
+	border-radius: 50px;
+	font-size: 16px;
+	cursor: pointer;
+	font-weight: bold;
+	font-family: inherit;
+	transition:
+		transform 0.2s,
+		background 0.2s;
+	margin-top: 10px;
+}
+.btn:hover {
+	background: #e66800;
+	transform: scale(1.05);
+}
+
+.error {
+	color: #dc2626;
+	font-size: 0.9rem;
+	margin-top: -5px;
+	margin-bottom: 15px;
+}
+
+.shake {
+	animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(-5px);
+	}
+	50% {
+		transform: translateX(5px);
+	}
+	75% {
+		transform: translateX(-5px);
+	}
+}
+
+/* Transition Animation */
+.pencil-animation {
+	font-size: 4rem;
+	display: inline-block;
+	animation: writing 1s infinite alternate;
+	margin-bottom: 10px;
+}
+
+@keyframes writing {
+	0% {
+		transform: translateX(-15px) rotate(-15deg);
+	}
+	100% {
+		transform: translateX(15px) rotate(15deg);
+	}
+}
+
+/* ==================== 3. Envelope ==================== */
+.envelope-screen {
+	position: relative;
+	padding-top: 150px;
+}
+
+.instruction {
+	position: absolute;
+	top: -50px;
+	left: 0;
+	right: 0;
+	text-align: center;
+	color: #c2410c;
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+
+.envelope-wrapper {
+	background: transparent;
+	border: none;
+	padding: 0;
+	outline: none;
+	position: relative;
+	width: 320px;
+	height: 280px; /* 👈 เพิ่มความสูงซองให้ครอบการ์ดมิด */
+	cursor: pointer;
+	perspective: 1000px;
+	transition: transform 0.3s;
+	margin: 0 auto;
+}
+.envelope-wrapper:hover {
+	transform: scale(1.02);
+}
+
+.envelope-back {
+	position: absolute;
+	inset: 0;
+	background: #fb923c;
+	border-radius: 8px;
+	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.envelope-pocket {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	/* 👈 ปรับสัดส่วนสามเหลี่ยมซองให้สมดุลกับความสูงใหม่ */
+	border-bottom: 160px solid #ea580c;
+	border-left: 160px solid #f97316;
+	border-right: 160px solid #f97316;
+	border-radius: 0 0 8px 8px;
+	z-index: 3;
+	pointer-events: none;
+}
+
+.envelope-flap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	/* 👈 ปรับฝาซองด้านบนให้ปิดลงมาพอดี */
+	border-top: 140px solid #c2410c;
+	border-left: 160px solid transparent;
+	border-right: 160px solid transparent;
+	transform-origin: top;
+	transition: transform 0.6s ease-in-out;
+	z-index: 4;
+}
+.envelope-flap.open {
+	transform: rotateX(180deg);
+}
+
+/* ตัวการ์ดข้อความ */
+.letter {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	width: 300px;
+	height: 400px;
+	background: #fffdf5;
+	border-radius: 12px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	z-index: 2;
+	transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+	padding: 15px;
+	box-sizing: border-box;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: 2px dashed #ffb26b;
+
+	/* ✨ เพิ่ม 2 บรรทัดนี้ เพื่อย่อการ์ดให้ซ่อนมิดในซอง ✨ */
+	transform: scale(0.65);
+	transform-origin: bottom center;
+}
+
+.letter.pulled {
+	/* ✨ แก้อัปเดตบรรทัด transform ให้ขยายกลับเป็น 100% แล้วดันขึ้น ✨ */
+	transform: scale(1) translateY(-220px);
+	z-index: 5;
+}
+
+/* 👈 ปรับขนาดตัวอักษรทั้งหมดให้พอดีกับการ์ดไซส์ใหม่ */
+.letter h1 {
+	color: #ff7300;
+	font-size: 1.6rem;
+	margin: 5px 0;
+}
+
+.letter h2 {
+	color: #ea580c;
+	font-size: 1rem;
+	font-weight: normal;
+	margin: 0 0 10px 0;
+}
+
+.cat-placeholder {
+	font-size: 3rem;
+	display: inline-block;
+	margin: 0;
+}
+
+.letter .message {
+	font-size: 0.85rem;
+	color: #555;
+	line-height: 1.5;
+	margin-bottom: 10px;
+	margin-top: 5px;
+}
+
+.signature {
+	font-weight: bold;
+	color: #ff7300;
+	margin: 0;
+	font-size: 0.9rem;
+}
+
+.signature_2 {
+	font-style: italic;
+	color: #9e0cc2;
+}
+
+@keyframes bounce {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
